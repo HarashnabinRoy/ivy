@@ -5,12 +5,6 @@ import TweetPost from './tweetPost'
 import Createpost from './createpost'
 import axios from 'axios';
 
-const data = [
-  { id: 1, text: 'Item 1' },
-  { id: 2, text: 'Item 2' },
-  { id: 3, text: 'Item 3' },
-];
-
 
 const Posts = () => {
 

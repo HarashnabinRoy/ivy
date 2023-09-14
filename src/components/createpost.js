@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
-const createpost = () => {
+const Createpost = () => {
 
     const [description, setDescription] = useState('');
     let token;
@@ -53,4 +53,4 @@ const createpost = () => {
   )
 }
 
-export default createpost
+export default Createpost
