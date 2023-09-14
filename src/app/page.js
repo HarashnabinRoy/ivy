@@ -32,10 +32,14 @@ export default function Home() {
 
       });
       // setLoading(false);
+
       console.log(response)
       if (response.status === 201) {
         router.push('/home');
         console.log("SignUp success");
+        
+        localStorage.setItem("authorization", JSON.stringify(response.data.token));
+        localStorage.setItem("userId", JSON.stringify(response.data.userId));
       }} 
       catch (error) {
         console.error('Login error:', error.response.data);

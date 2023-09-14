@@ -13,7 +13,7 @@ const TweetPost = ({ userName, createdAt, text }) => {
       <div className="flex items-center mb-2">
         <div className="w-10 h-10 bg-gray-400 rounded-full mr-2"></div>
         <div>
-          <p className="font-semibold">@HarashnabinRoy</p>
+          <p className="font-semibold">@{userName}</p>
           <p className="text-gray-500 text-xs">Now</p>
         </div>
       </div>
