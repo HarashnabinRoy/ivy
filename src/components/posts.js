@@ -22,7 +22,7 @@ const Posts = () => {
       },
     })
       .then((response) => {
-        setResponseData(response.data);
+        setResponseData(response.data.tweets);
         // setLoading(false);
         console.log(response.data);
       })
@@ -33,16 +33,18 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className='flex flex-row gap-4'>
-      <div className='flex flex-col border-x-[2px] border-[#2F3336]'>
+    <div className='flex flex-row'>
+      <div className='min-h-screen w-[1px] bg-[#2F3336]'></div>
+      <div className='flex flex-col'>
         <div className='text-2xl ml-4'>Home</div>
         <div className='mt-4'><Createpost /></div>
         {responseData?.map((item)=>(
           <div key={item._id} className='mt-4 flex flex-col gap-10'>
-            <TweetPost userName={item.userId} text={item.description}/>
+            <TweetPost tweetID = {item._id} userName={item.userName} text={item.description}/>
           </div>
         ))}
       </div>
+      <div className='min-h-screen w-[1px] bg-[#2F3336]'></div>
     </div>
   )
 }

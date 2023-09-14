@@ -21,7 +21,7 @@ const Posts = () => {
         },
       })
         .then((response) => {
-          setResponseData(response.data);
+          setResponseData(response.data.tweets);
           // setLoading(false);
           console.log(response.data);
         })
@@ -32,17 +32,25 @@ const Posts = () => {
     }, []);
 
   return (
-    <div className='flex flex-col border-x-[2px] border-[#2F3336]'>
-      <div className='text-2xl ml-4'>@HarashnabinRoy</div>
-      <div className='mt-4'><Createpost /></div>
-      {responseData?.map((item)=>(
-        // item._id==="6502dbcf05c04ee26a606d4b"? 
-          <div key={item._id} className='mt-4 flex flex-col gap-10'>
-            <TweetPost userName={item.userId} text={item.description}/>
-          </div> 
-        //   : <span></span>
-        ))}
+    <div className='flex flex-row'>
+
+      <div className='min-h-screen w-[1px] bg-[#2F3336]'></div>
+
+      <div className='flex flex-col'>
+        <div className='text-2xl ml-4'>@HarashnabinRoy</div>
+        <div className='mt-4'><Createpost /></div>
+        {responseData?.map((item)=>(
+          // item._id===userId? 
+            <div key={item._id} className='mt-4 flex flex-col gap-10'>
+              <TweetPost userName={item.userName} text={item.description}/>
+            </div> 
+            // : <span></span>
+          ))}
+      </div>
+
+      <div className='min-h-screen w-[1px] bg-[#2F3336]'></div>
     </div>
+
   )
 }
 
