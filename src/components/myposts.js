@@ -36,9 +36,11 @@ const Posts = () => {
       <div className='text-2xl ml-4'>@HarashnabinRoy</div>
       <div className='mt-4'><Createpost /></div>
       {responseData?.map((item)=>(
+        // item._id==="6502dbcf05c04ee26a606d4b"? 
           <div key={item._id} className='mt-4 flex flex-col gap-10'>
             <TweetPost userName={item.userId} text={item.description}/>
-          </div>
+          </div> 
+        //   : <span></span>
         ))}
     </div>
   )

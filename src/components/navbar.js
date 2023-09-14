@@ -1,11 +1,16 @@
 'use client'
 import Link from 'next/link'
 import React from 'react'
+import { useRouter } from "next/navigation";
 
 const navbar = () => {
+  const router = useRouter();
 
   const handleClick = () => {
+
+    localStorage.removeItem("authorization");
     console.log("button Clicked");
+    router.push('/login');
   };
 
   return (

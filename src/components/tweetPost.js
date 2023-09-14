@@ -24,6 +24,18 @@ const TweetPost = ({ userName, createdAt, text }) => {
       >
         Likes ({likes})
       </button>
+      <button
+        onClick={handleLikeClick}
+        className="bg-[#2B8CD6] text-white px-4 py-1 mt-4 rounded-full hover:bg-blue-600"
+      >
+        Edit
+      </button>
+      <button
+        onClick={handleLikeClick}
+        className="bg-[#2B8CD6] text-white px-4 py-1 mt-4 rounded-full hover:bg-blue-600"
+      >
+        Delete
+      </button>
       <div className='h-[1px] w-full bg-[#2F3336] mt-10'></div>
     </div>
   );
