@@ -18,28 +18,30 @@ export default function Home() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  // let duplicate = "Duplicate emails/usernames not allowed!";
 
-  // const handleSignUp = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     console.log(name,email,password);
-  //     setLoading(true);
-  //     const response = await axios.post('https://richpanelbe-production.up.railway.app/api/user/signUp', {
-  //       name: name,
-  //       email: email,
-  //       password: password,
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(name,email,password);
+      // setLoading(true);
+      const response = await axios.post('https://ivykids.onrender.com/api/user/signUp', {
+        name: name,
+        email: email,
+        password: password,
 
-  //     });
-  //     setLoading(false);
-  //     console.log(response)
-  //     if (response.status === 201) {
-  //       router.push('/login');
-  //       // console.log("Test");
-  //     }
-  //   } catch (error) {
-  //     console.error('Login error:', error.response.data);
-  //   }
-  // };
+      });
+      // setLoading(false);
+      console.log(response)
+      if (response.status === 201) {
+        router.push('/home');
+        console.log("SignUp success");
+      }} 
+      catch (error) {
+        console.error('Login error:', error.response.data);
+        alert(error.response.data.message);
+      }
+  };
 
 
   return (
@@ -47,17 +49,17 @@ export default function Home() {
       {/* {loading && <Loading />} */}
       <div className="flex bg-white rounded-2xl p-12 flex-col">    
         <div className="flex justify-center mb-6 text-xl">Create Account</div>
-        {/* <form onSubmit={handleSignUp}> */}
-        <form>
+        <form onSubmit={handleSignUp}>
 
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">User Name</label>
           <input 
             type="text" 
             className="w-[300px] px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Username"
           />
         </div>
 
@@ -83,7 +85,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="mb-10">
+        {/* <div className="mb-10">
           <label className="flex items-center">
             <input
               type="checkbox"
@@ -93,11 +95,11 @@ export default function Home() {
             />
             <span className="text-sm text-gray-700">Remember me</span>
           </label>
-        </div>
+        </div> */}
 
         {/* <Link href="plans"> */}
           <button 
-            className="bg-[#000000] text-white px-4 py-2 w-full" 
+            className="bg-[#000000] text-white px-4 py-2 w-full mt-4" 
             type="submit"
           >
             Sign Up

@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link";
 import React, { useState, useRef } from "react";
-// import axios from "axios";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 // import Loading from "@/components/shared/loader";
 
@@ -28,33 +28,34 @@ export default function Login() {
     //   }
     // }
 
-    // const handleLogin = async (e) => {
-    //   e.preventDefault();
-    //   try {
-    //     console.log(email,password);
-    //     setLoading(true);
-    //     const response = await axios.post('https://richpanelbe-production.up.railway.app/api/user/login', {
-    //       email,
-    //       password,
-    //     });
-    //     setLoading(false);
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      try {
+        console.log(email,password);
+        // setLoading(true);
+        const response = await axios.post('https://ivykids.onrender.com/api/user/login', {
+          email,
+          password,
+        });
+        // setLoading(false);
 
-    //     console.log(response.data.token);
+        console.log(response.data.token);
 
 
-        // if (response.data.token) {
-        //   router.push('/plans');
+        if (response.data.token) {
+          router.push('/home');
+          console.log("Login success");
           // if(rememberMe){
           //   handleRememberMe();
           // }
 
-        // }
-    //     localStorage.setItem("authorization", JSON.stringify(response.data.token));
-    //     localStorage.setItem("userId", JSON.stringify(response.data.userId));
-    //   } catch (error) {
-    //     console.error('Login error:', error.response.data);
-    //   }
-    // }
+        }
+        localStorage.setItem("authorization", JSON.stringify(response.data.token));
+        localStorage.setItem("userId", JSON.stringify(response.data.userId));
+      } catch (error) {
+        console.error('Login error:', error.response.data);
+      }
+    }
 
   return (
     <div className="bg-[#000000] flex min-h-screen justify-center items-center flex-col gap-10">
@@ -62,8 +63,7 @@ export default function Login() {
       <div className="flex bg-white rounded-2xl p-12 flex-col">
 
         <div className="flex justify-center mb-6 text-xl">Login to your account</div>
-        {/* <form onSubmit={handleLogin}> */}
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input 
@@ -86,7 +86,7 @@ export default function Login() {
             />
           </div>
 
-          <div className="mb-10">
+          {/* <div className="mb-10">
             <label className="flex items-center">
               <input
                 type="checkbox"
@@ -97,10 +97,10 @@ export default function Login() {
               />
               <span className="text-sm text-gray-700">Remember me</span>
             </label>
-          </div>  
+          </div>   */}
 
           <button
-            className="bg-[#000000] text-white px-4 py-2 w-full" 
+            className="bg-[#000000] text-white px-4 py-2 w-full mt-4" 
             type="submit"
           >
             Login
