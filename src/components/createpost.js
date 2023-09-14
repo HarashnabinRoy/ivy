@@ -28,10 +28,10 @@ const Createpost = () => {
     };
 
   return (
-    <div className=' bg-black p-4 rounded shadow-md border-y border-[#2F3336] text-white text-lg'>
+    <div className=' bg-black p-4 rounded shadow-md border-y border-[#2F3336] text-white text-lg '>
         <form onSubmit={handleSubmit}>
             <input 
-                className='w-[400px] bg-black p-4 rounded shadow-md text-white text-lg w-full ' 
+                className='w-[400px] bg-black p-4 rounded shadow-md text-white text-lg w-[300px] ' 
                 placeholder='What is Happening?'         
                 style={{
                     resize: 'none', 

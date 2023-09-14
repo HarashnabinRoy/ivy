@@ -24,7 +24,7 @@ const Posts = () => {
       .then((response) => {
         setResponseData(response.data.tweets);
         // setLoading(false);
-        console.log(response.data);
+        console.log(response.data.tweets[0].likesize);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -40,7 +40,7 @@ const Posts = () => {
         <div className='mt-4'><Createpost /></div>
         {responseData?.map((item)=>(
           <div key={item._id} className='mt-4 flex flex-col gap-10'>
-            <TweetPost tweetID = {item._id} userName={item.userName} text={item.description}/>
+            <TweetPost tweetID = {item._id} likes={item.likesize} userName={item.userName} text={item.description}/>
           </div>
         ))}
       </div>

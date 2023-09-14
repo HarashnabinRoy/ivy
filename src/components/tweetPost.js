@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const TweetPost = ({ userName, createdAt, tweetID, text }) => {
-  const [likes, setLikes] = useState(0);
+const TweetPost = ({ userName, createdAt, tweetID, text, likes }) => {
+  // const [likes, setLikes] = useState(0);
   let token;
   if (typeof window !== 'undefined') {
     token = JSON.parse(localStorage.getItem('authorization')); 
