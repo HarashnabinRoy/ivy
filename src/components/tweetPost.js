@@ -102,7 +102,7 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
         <div className="w-10 h-10 bg-gray-400 rounded-full mr-2"></div>
         <div>
           <p className="font-semibold">@{userName}</p>
-          <p className="text-gray-500 text-xs">{createdAt}</p>
+          <p className="text-gray-500 text-xs">{createdAt} ago</p>
         </div>
       </div>
       <p className="text-lg w-[400px] mt-4">{editedText}</p>

@@ -5,6 +5,7 @@ import TweetPost from './tweetPost'
 import Createpost from './createpost'
 import axios from 'axios';
 import Loading from "@/components/loading/loader";
+import { formatDistance } from 'date-fns'
 
 
 const Posts = () => {
@@ -15,7 +16,7 @@ const Posts = () => {
   if (typeof window !== 'undefined') {
     token = JSON.parse(localStorage.getItem('authorization')); 
   }
-
+  // const datestr = formatDistance(new Date(responseData.createdAt))
   
   useEffect(() => {
     setLoading(true)
@@ -55,11 +56,13 @@ const Posts = () => {
         <div className='text-2xl px-4'>Home</div>
           <div className='mt-4'><Createpost /></div>
           {loading && <Loading />}
-          {responseData?.map((item) => (
+          {responseData?.map((item) => {  
+            const datestr = formatDistance(new Date(item.createdAt), new Date())
+            return(
             <div key={item._id} className='mt-4 flex flex-col gap-10'>
-              <TweetPost createdAt={item.createdAt} userId={item.userId} tweetID={item._id} likes={item.likesize} userName={item.userName} text={item.description} />
-            </div>
-          ))}
+              <TweetPost createdAt={datestr} userId={item.userId} tweetID={item._id} likes={item.likesize} userName={item.userName} text={item.description} />
+            </div>)
+          })}
           {!loading && (!responseData || responseData.length === 0) && (
             <div className=' flex text-center p-10'>Follow a few people or post tweets yourself</div>
           )}
