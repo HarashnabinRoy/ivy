@@ -3,7 +3,7 @@ import Navbar from '@/components/navbar'
 import Wtf from '@/components/wtf'
 import MyPosts from '@/components/myposts'
 
-const profile = () => {
+const Profile = () => {
   return (
     <div className='bg-black  min-h-screen text-white flex justify-center'>
     <div className='flex flex-row gap-20 mt-4'>
@@ -15,4 +15,4 @@ const profile = () => {
   )
 }
 
-export default profile
+export default Profile

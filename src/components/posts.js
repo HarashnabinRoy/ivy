@@ -27,6 +27,7 @@ const Posts = () => {
       .then((response) => {
         setResponseData(response.data.tweets);
         setLoading(false);
+        localStorage.setItem("userName", JSON.stringify(response.data.loggedInusername));
         console.log(response.data);
       })
       .catch((error) => {
@@ -39,7 +40,7 @@ const Posts = () => {
     <div className='flex flex-row'>
       <div className='min-h-screen w-[1px] bg-[#2F3336]'></div>
       <div className='flex flex-col'>
-        <div className='text-2xl ml-4'>Home</div>
+        <div className='text-2xl px-4'>Home</div>
         <div className='mt-4'><Createpost /></div>
         {loading ? <Loading /> : ''}
         {responseData?.map((item)=>(

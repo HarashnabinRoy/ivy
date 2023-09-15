@@ -12,6 +12,7 @@ const Wtf = () => {
   if (typeof window !== 'undefined') {
     token = JSON.parse(localStorage.getItem('authorization')); 
   }
+
   
   useEffect(() => {
     setLoading(true)
@@ -69,7 +70,15 @@ const Wtf = () => {
     }
 
   return (
-    <div className=' bg-[#16181C] rounded-2xl p-4 mt-28'>
+    <div className='flex flex-col gap-20 mt-28'>
+      {/* <div className='bg-[#16181C] rounded-3xl p-2'>
+        <div className='text-xl ml-4'>@{loggedInusername}</div>
+        <div className='ml-8 text-xs'>Following: </div>
+      </div> */}
+
+
+      <div className=' bg-[#16181C] rounded-2xl p-4'>
+        
         <div className='font-bold text-2xl'>Who to follow</div>
         <div className=' w-[300px] flex flex-col text-lg mt-10 gap-4'>
           {loading ? <Loading /> : ''}
@@ -88,7 +97,9 @@ const Wtf = () => {
 
         </div>
 
+      </div>
     </div>
+   
   )
 }
 

@@ -33,7 +33,7 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
               authorization: token,
             },
       })
-      window.location.reload();
+      // window.location.reload();
       console.log('Successfully Liked');
       console.log(response.data);
       setLoading(false)
@@ -45,10 +45,12 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
   };
 
   let token;
+  let userID;
   if (typeof window !== 'undefined') {
     token = JSON.parse(localStorage.getItem('authorization')); 
+    userID = JSON.parse(localStorage.getItem('userId'))
   }
-  let userID = JSON.parse(localStorage.getItem('userId'))
+  
 
 
   const handleLikeClick = async (id) => {
@@ -104,6 +106,12 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
         </div>
       </div>
       <p className="text-lg w-[400px] mt-4">{editedText}</p>
+      {/* {isEditing?(<div><input
+                  type="text"
+                  value={editedText}
+                  onChange={handleInputChange}
+                  className='text-white bg-black p-2 h-8 outline-none'
+                /></div>):{editedText}} */}
       <div className='flex flex-row mt-4 justify-end gap-2'>
         <button
           onClick={()=>handleLikeClick(tweetID)}
@@ -116,7 +124,12 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
           <div className='flex flex-row gap-2'>
             {isEditing?(
               <div className='flex flex-row gap-2'>
-                <textarea value={editedText} onChange={handleInputChange} className='text-white bg-black p-2 h-8 outline-none'/>
+                <input
+                  type="text"
+                  value={editedText}
+                  onChange={handleInputChange}
+                  className='text-white bg-black p-2 h-8 outline-none'
+                />
                 <button onClick={handleCancelClick} className="bg-[#2B8CD6] text-white px-4 py-1 rounded-full hover:bg-blue-600">Cancel</button>
                 <button onClick={()=>handleSaveClick(tweetID)} className="bg-[#2B8CD6] text-white px-4 py-1 rounded-full hover:bg-blue-600">Save</button>
               </div>

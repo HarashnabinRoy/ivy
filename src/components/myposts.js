@@ -12,10 +12,12 @@ const Posts = () => {
     const [userName, setUserName] = useState('UserName');
     const [loading, setLoading] = useState(false);
     let token;
+    let userID;
     if (typeof window !== 'undefined') {
       token = JSON.parse(localStorage.getItem('authorization')); 
+      userID = JSON.parse(localStorage.getItem('userId'));
     }
-    let userID = JSON.parse(localStorage.getItem('userId'))
+
     // console.log(userID);
   
     useEffect(() => {
@@ -36,7 +38,7 @@ const Posts = () => {
           console.error('Error fetching data:', error);
           setLoading(false);
         });
-    }, []);
+    }, [1]);
 
   return (
     <div className='flex flex-row'>
@@ -47,12 +49,19 @@ const Posts = () => {
         <div className='text-2xl ml-4'>{loading ? <Loading /> : '@'+userName}</div>
         <div className='mt-4'><Createpost /></div>
         {loading ? <Loading /> : ''}
-        {responseData?.map((item)=>(
-          item.userId===userID ? 
+          {responseData?.map((item) => (
             <div key={item._id} className='mt-4 flex flex-col gap-10'>
-              <TweetPost createdAt={item.createdAt} userId={item.userId} tweetID = {item._id} userName={item.userName} likes={item.likesize} text={item.description}/>
-            </div> 
-            : <span></span>
+              {item.userId === userID && (
+                <TweetPost
+                  createdAt={item.createdAt}
+                  userId={item.userId}
+                  tweetID={item._id}
+                  userName={item.userName}
+                  likes={item.likesize}
+                  text={item.description}
+                />
+              )}
+            </div>
           ))}
       </div>
 
