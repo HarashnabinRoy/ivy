@@ -16,7 +16,7 @@ const Wtf = () => {
   
   useEffect(() => {
     setLoading(true)
-    axios.get('https://ivykids.onrender.com/api/user/allUsers', {
+    axios.get('https://ivybe-production.up.railway.app/api/user/allUsers', {
       headers: {
         authorization: token,
       },
@@ -37,7 +37,7 @@ const Wtf = () => {
       try {
         setLoading(true);
         console.log(id, token);
-        const response = await axios.put(`https://ivykids.onrender.com/api/user/unfollow/${id}` ,{},{
+        const response = await axios.put(`https://ivybe-production.up.railway.app/api/user/unfollow/${id}` ,{},{
             headers: {
                 authorization: token,
               },
@@ -56,7 +56,7 @@ const Wtf = () => {
       
       try {
         console.log(id, token);
-        const response = await axios.put(`https://ivykids.onrender.com/api/user/follow/${id}` ,{},{
+        const response = await axios.put(`https://ivybe-production.up.railway.app/api/user/follow/${id}` ,{},{
             headers: {
                 authorization: token,
               },

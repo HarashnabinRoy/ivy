@@ -23,11 +23,11 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
   };
 
   const handleSaveClick = async (id) => {
-    //https://ivykids.onrender.com/api/tweet/updateTweet/${tweetID}
+    //https://ivybe-production.up.railway.app/api/tweet/updateTweet/${tweetID}
     try {
       setLoading(true)
       console.log(id, token, editedText);
-      const response = await axios.put(`https://ivykids.onrender.com/api/tweet/updateTweet/${id}` ,{
+      const response = await axios.put(`https://ivybe-production.up.railway.app/api/tweet/updateTweet/${id}` ,{
         description: editedText 
       },{
           headers: {
@@ -59,7 +59,7 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
     try {
       setLoading(true)
       console.log(id, token);
-      const response = await axios.put(`https://ivykids.onrender.com/api/tweet/like/${id}` ,{},{
+      const response = await axios.put(`https://ivybe-production.up.railway.app/api/tweet/like/${id}` ,{},{
           headers: {
               authorization: token,
             },
@@ -80,7 +80,7 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
     try {
       setLoading(true)
       console.log(id, token);
-      await axios.delete(`https://ivykids.onrender.com/api/tweet/${id}` ,{
+      await axios.delete(`https://ivybe-production.up.railway.app/api/tweet/${id}` ,{
           headers: {
               authorization: token,
             },

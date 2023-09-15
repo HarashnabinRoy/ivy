@@ -25,7 +25,7 @@ export default function Home() {
     try {
       console.log(name,email,password);
       setLoading(true);
-      const response = await axios.post('https://ivykids.onrender.com/api/user/signUp', {
+      const response = await axios.post('https://ivybe-production.up.railway.app/api/user/signUp', {
         name: name,
         email: email,
         password: password,

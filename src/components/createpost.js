@@ -14,7 +14,7 @@ const Createpost = () => {
         e.preventDefault();
 
         try {
-            await axios.post('https://ivykids.onrender.com/api/tweet', { description } ,{
+            await axios.post('https://ivybe-production.up.railway.app/api/tweet', { description } ,{
                 headers: {
                     authorization: token,
                   },

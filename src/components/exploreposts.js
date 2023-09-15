@@ -22,7 +22,7 @@ const Posts = () => {
   
     useEffect(() => {
       setLoading(true)
-      axios.get('https://ivykids.onrender.com/api/tweet/getAllTweets', {
+      axios.get('https://ivybe-production.up.railway.app/api/tweet/getAllTweets', {
         headers: {
           authorization: token,
         },

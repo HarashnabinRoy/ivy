@@ -33,7 +33,7 @@ export default function Login() {
       try {
         console.log(email,password);
         setLoading(true);
-        const response = await axios.post('https://ivykids.onrender.com/api/user/login', {
+        const response = await axios.post('https://ivybe-production.up.railway.app/api/user/login', {
           email,
           password,
         });
