@@ -5,11 +5,52 @@ import Loading from "@/components/loading/loader";
 
 const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
   const [loading, setLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(text);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleInputChange = (e) => {
+    setEditedText(e.target.value);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    setEditedText(text);
+  };
+
+  const handleSaveClick = async (id) => {
+    //https://ivykids.onrender.com/api/tweet/updateTweet/${tweetID}
+    try {
+      setLoading(true)
+      console.log(id, token, editedText);
+      const response = await axios.put(`https://ivykids.onrender.com/api/tweet/updateTweet/${id}` ,{
+        description: editedText 
+      },{
+          headers: {
+              authorization: token,
+            },
+      })
+      window.location.reload();
+      console.log('Successfully Liked');
+      console.log(response.data);
+      setLoading(false)
+    } catch (error) {
+        console.error('Error while editing:', error);
+        setLoading(false)
+    }
+    setIsEditing(false);
+  };
+
   let token;
   if (typeof window !== 'undefined') {
     token = JSON.parse(localStorage.getItem('authorization')); 
   }
   let userID = JSON.parse(localStorage.getItem('userId'))
+
+
   const handleLikeClick = async (id) => {
 
     try {
@@ -30,10 +71,6 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
         setLoading(false)
     }
   };
-
-  const handleEditClick = () => {
-    console.log("Edit button working!");
-  }
 
   const handleDeleteClick = async (id) => {
     
@@ -66,7 +103,7 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
           <p className="text-gray-500 text-xs">{createdAt}</p>
         </div>
       </div>
-      <p className="text-lg w-[400px] mt-4">{text}</p>
+      <p className="text-lg w-[400px] mt-4">{editedText}</p>
       <div className='flex flex-row mt-4 justify-end gap-2'>
         <button
           onClick={()=>handleLikeClick(tweetID)}
@@ -75,14 +112,26 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
           
           Like ({likes})
         </button>
-        {userId===userID? 
+        {userId===userID && (
           <div className='flex flex-row gap-2'>
-            <button
-              onClick={handleEditClick}
-              className="bg-[#2B8CD6] text-white px-4 py-1 rounded-full hover:bg-blue-600"
-            >
-              Edit
-            </button>
+            {isEditing?(
+              <div className='flex flex-row gap-2'>
+                <textarea value={editedText} onChange={handleInputChange} className='text-white bg-black p-2 h-8 outline-none'/>
+                <button onClick={handleCancelClick} className="bg-[#2B8CD6] text-white px-4 py-1 rounded-full hover:bg-blue-600">Cancel</button>
+                <button onClick={()=>handleSaveClick(tweetID)} className="bg-[#2B8CD6] text-white px-4 py-1 rounded-full hover:bg-blue-600">Save</button>
+              </div>
+            ): (
+              <div>
+                <button
+                  onClick={handleEditClick}
+                  className="bg-[#2B8CD6] text-white px-4 py-1 rounded-full hover:bg-blue-600"
+                >
+                  Edit
+                </button>
+              </div>
+            )}
+
+
             <button
               onClick={()=>handleDeleteClick(tweetID)}
               className="bg-[#2B8CD6] text-white px-4 py-1 rounded-full hover:bg-blue-600"
@@ -90,8 +139,8 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
               Delete
             </button> 
           </div>
-          : <span></span>
-        }
+          // ): <span></span>
+        )}
       </div>
 
       <div className='h-[1px] w-full bg-[#2F3336] mt-10'></div>

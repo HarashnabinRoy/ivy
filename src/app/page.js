@@ -37,12 +37,15 @@ export default function Home() {
       if (response.status === 201) {
         localStorage.setItem("authorization", JSON.stringify(response.data.token));
         localStorage.setItem("userId", JSON.stringify(response.data.userId));
-        router.push('/home');
+        console.log(response.data);
+        // router.push('/home');
+        router.push('/login');
         console.log("SignUp success");
       }} 
       catch (error) {
         console.error('Login error:', error.response.data);
         alert(error.response.data.message);
+        setLoading(false);
       }
   };
 
