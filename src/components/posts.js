@@ -4,18 +4,21 @@ import { useEffect, useState } from 'react'
 import TweetPost from './tweetPost'
 import Createpost from './createpost'
 import axios from 'axios';
+import Loading from "@/components/loading/loader";
 
 
 const Posts = () => {
 
   const [responseData, setResponseData] = useState();
+  const [loading, setLoading] = useState(false);
   let token;
   if (typeof window !== 'undefined') {
     token = JSON.parse(localStorage.getItem('authorization')); 
   }
 
-
+  
   useEffect(() => {
+    setLoading(true)
     axios.get('https://ivykids.onrender.com/api/tweet/getAllTweets', {
       headers: {
         authorization: token,
@@ -23,12 +26,12 @@ const Posts = () => {
     })
       .then((response) => {
         setResponseData(response.data.tweets);
-        // setLoading(false);
-        console.log(response.data.tweets[0].likesize);
+        setLoading(false);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        // setLoading(false);
+
       });
   }, []);
 
@@ -38,9 +41,10 @@ const Posts = () => {
       <div className='flex flex-col'>
         <div className='text-2xl ml-4'>Home</div>
         <div className='mt-4'><Createpost /></div>
+        {loading ? <Loading /> : ''}
         {responseData?.map((item)=>(
           <div key={item._id} className='mt-4 flex flex-col gap-10'>
-            <TweetPost tweetID = {item._id} likes={item.likesize} userName={item.userName} text={item.description}/>
+            <TweetPost createdAt={item.createdAt} userId={item.userId} tweetID = {item._id} likes={item.likesize} userName={item.userName} text={item.description}/>
           </div>
         ))}
       </div>

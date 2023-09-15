@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-// import Loading from "@/components/shared/loader";
+import Loading from "@/components/loading/loader";
 
 
 
@@ -32,12 +32,12 @@ export default function Login() {
       e.preventDefault();
       try {
         console.log(email,password);
-        // setLoading(true);
+        setLoading(true);
         const response = await axios.post('https://ivykids.onrender.com/api/user/login', {
           email,
           password,
         });
-        // setLoading(false);
+        setLoading(false);
 
         console.log(response.data.token);
 
@@ -55,12 +55,14 @@ export default function Login() {
       } catch (error) {
         console.error('Login error:', error.response.data);
         alert(error.response.data.message);
+        setLoading(false);
       }
     }
 
   return (
     <div className="bg-[#000000] flex min-h-screen justify-center items-center flex-col gap-10">
-      {/* {loading && <Loading />} */}
+      <div className='jutify-center items-center flex mb-20 font-extrabold text-white text-4xl'>TWITTER<span className='font-normal ml-2'>IVY</span></div>
+
       <div className="flex bg-white rounded-2xl p-12 flex-col">
 
         <div className="flex justify-center mb-6 text-xl">Login to your account</div>
@@ -101,10 +103,10 @@ export default function Login() {
           </div>   */}
 
           <button
-            className="bg-[#000000] text-white px-4 py-2 w-full mt-4" 
+            className={`${loading?'bg-gray-500':'bg-[#000000]'} text-white px-4 py-2 w-full mt-4`}
             type="submit"
           >
-            Login
+           {loading ? <Loading /> : 'Login'}
           </button>
         </form>
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React,{ useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-// import Loading from "@/components/shared/loader";
+import Loading from "@/components/loading/loader";
 
 //richpanelbe-production.up.railway.app
 
@@ -24,22 +24,21 @@ export default function Home() {
     e.preventDefault();
     try {
       console.log(name,email,password);
-      // setLoading(true);
+      setLoading(true);
       const response = await axios.post('https://ivykids.onrender.com/api/user/signUp', {
         name: name,
         email: email,
         password: password,
 
       });
-      // setLoading(false);
+      setLoading(false);
 
       console.log(response)
       if (response.status === 201) {
-        router.push('/home');
-        console.log("SignUp success");
-        
         localStorage.setItem("authorization", JSON.stringify(response.data.token));
         localStorage.setItem("userId", JSON.stringify(response.data.userId));
+        router.push('/home');
+        console.log("SignUp success");
       }} 
       catch (error) {
         console.error('Login error:', error.response.data);
@@ -50,8 +49,9 @@ export default function Home() {
 
   return (
     <div className="bg-[#000000] flex min-h-screen justify-center items-center flex-col gap-10">
-      {/* {loading && <Loading />} */}
+      <div className='jutify-center items-center flex mb-20 font-extrabold text-white text-4xl'>TWITTER<span className='font-normal ml-2'>IVY</span></div>
       <div className="flex bg-white rounded-2xl p-12 flex-col">    
+      
         <div className="flex justify-center mb-6 text-xl">Create Account</div>
         <form onSubmit={handleSignUp}>
 
@@ -103,10 +103,10 @@ export default function Home() {
 
         {/* <Link href="plans"> */}
           <button 
-            className="bg-[#000000] text-white px-4 py-2 w-full mt-4" 
+            className={`${loading?'bg-gray-500':'bg-[#000000]'} text-white px-4 py-2 w-full mt-4`} 
             type="submit"
           >
-            Sign Up
+            {loading ? <Loading /> : 'Sign Up'}
           </button>
         {/* </Link> */}
         </form>

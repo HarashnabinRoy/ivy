@@ -2,18 +2,19 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-// https://ivykids.onrender.com/api/user/follow/tofollowID
-
-const wtf = () => {
+import Loading from "@/components/loading/loader";
+const Wtf = () => {
 
   const [responseData, setResponseData] = useState();
-  // const [toFollowID, setToFollowID] = useState();
+  const [loading, setLoading] = useState(false);
+
   let token;
   if (typeof window !== 'undefined') {
     token = JSON.parse(localStorage.getItem('authorization')); 
   }
   
   useEffect(() => {
+    setLoading(true)
     axios.get('https://ivykids.onrender.com/api/user/allUsers', {
       headers: {
         authorization: token,
@@ -21,20 +22,19 @@ const wtf = () => {
     })
       .then((response) => {
         setResponseData(response.data.users);
-        // setLoading(false);
+        setLoading(false);
         console.log(response.data.users);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        // setLoading(false);
+        setLoading(false);
       });
     }, []);
-    useEffect(()=>{
-      
-    }, []);
+
     const handleUnFollowButton = async (id) => {
       
       try {
+        setLoading(true);
         console.log(id, token);
         const response = await axios.put(`https://ivykids.onrender.com/api/user/unfollow/${id}` ,{},{
             headers: {
@@ -44,8 +44,10 @@ const wtf = () => {
         console.log(response.data);
         window.location.reload();
         console.log('Successfully followed');
+        setLoading(false);
       } catch (error) {
           console.error('Error while Following:', error);
+          setLoading(false);
       }
     }
 
@@ -70,6 +72,7 @@ const wtf = () => {
     <div className=' bg-[#16181C] rounded-2xl p-4 mt-28'>
         <div className='font-bold text-2xl'>Who to follow</div>
         <div className=' w-[300px] flex flex-col text-lg mt-10 gap-4'>
+          {loading ? <Loading /> : ''}
           {responseData?.map((item)=>(
             item.isFollowing?
             <div key={item._id} className='flex flex-row justify-between items-center'>
@@ -89,4 +92,4 @@ const wtf = () => {
   )
 }
 
-export default wtf
+export default Wtf
