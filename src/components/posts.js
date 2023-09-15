@@ -39,16 +39,31 @@ const Posts = () => {
   return (
     <div className='flex flex-row'>
       <div className='min-h-screen w-[1px] bg-[#2F3336]'></div>
-      <div className='flex flex-col'>
+      {/* <div className='flex flex-col'>
         <div className='text-2xl px-4'>Home</div>
         <div className='mt-4'><Createpost /></div>
         {loading ? <Loading /> : ''}
-        {responseData?.map((item)=>(
+        {responseData? .map((item)=>(
           <div key={item._id} className='mt-4 flex flex-col gap-10'>
             <TweetPost createdAt={item.createdAt} userId={item.userId} tweetID = {item._id} likes={item.likesize} userName={item.userName} text={item.description}/>
           </div>
-        ))}
-      </div>
+        )) : (
+          <div>Please follow a few people or make some tweets yourself</div>
+        )}
+      </div> */}
+      <div className='flex flex-col'>
+        <div className='text-2xl px-4'>Home</div>
+          <div className='mt-4'><Createpost /></div>
+          {loading && <Loading />}
+          {responseData?.map((item) => (
+            <div key={item._id} className='mt-4 flex flex-col gap-10'>
+              <TweetPost createdAt={item.createdAt} userId={item.userId} tweetID={item._id} likes={item.likesize} userName={item.userName} text={item.description} />
+            </div>
+          ))}
+          {!loading && (!responseData || responseData.length === 0) && (
+            <div className=' flex text-center p-10'>Follow a few people or post tweets yourself</div>
+          )}
+        </div>
       <div className='min-h-screen w-[1px] bg-[#2F3336]'></div>
     </div>
   )
