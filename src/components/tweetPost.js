@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Loading from "@/components/loading/loader";
+import { formatDistance } from 'date-fns';
 
 const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
   const [loading, setLoading] = useState(false);
@@ -95,6 +96,7 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
 
     console.log("Delete Button working");
   }
+  const datestr = formatDistance(new Date(createdAt), new Date());
 
   return (
     <div className="bg-black p-4 rounded shadow-md text-white">
@@ -102,7 +104,7 @@ const TweetPost = ({ userName, createdAt, tweetID, text, likes, userId }) => {
         <div className="w-10 h-10 bg-gray-400 rounded-full mr-2"></div>
         <div>
           <p className="font-semibold">@{userName}</p>
-          <p className="text-gray-500 text-xs">{createdAt} ago</p>
+          <p className="text-gray-500 text-xs">{datestr} ago</p>
         </div>
       </div>
       <p className="text-lg w-[400px] mt-4">{editedText}</p>

@@ -49,7 +49,7 @@ const Posts = () => {
         <div className='text-2xl ml-4'>{loading ? <Loading /> : '@'+userName}</div>
         <div className='mt-4'><Createpost /></div>
         {loading ? <Loading /> : ''}
-          {responseData?.map((item) => (
+          {responseData?.map((item) =>  (
             <div key={item._id} className='mt-4 flex flex-col gap-10'>
               {item.userId === userID && (
                 <TweetPost
