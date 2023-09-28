@@ -17,7 +17,7 @@ const Navbar = () => {
     <div className='flex flex-row justify-center gap-4 text-2xl'>
       <div className='flex flex-col gap-6'>
 
-        <div className='jutify-center items-center flex mb-20 font-extrabold'>TWITTER<span className='font-normal ml-2'>IVY</span></div>
+        <div className='jutify-center items-center flex mb-20 font-extrabold'>TWITTER<span className='font-normal ml-2 text-[#FFD700]'>Gold</span></div>
         <Link href="/home" className='hover:bg-[#16181C] rounded-2xl pl-4 py-2'><div>Home</div></Link>
         {/* <Link href="/explore" className='hover:bg-[#16181C] rounded-2xl pl-4 py-2'><div>Explore</div></Link> */}
         <Link href="/profile" className='hover:bg-[#16181C] rounded-2xl pl-4 py-2'><div>My Profile</div></Link>

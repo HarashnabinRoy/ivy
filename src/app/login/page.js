@@ -61,7 +61,7 @@ export default function Login() {
 
   return (
     <div className="bg-[#000000] flex min-h-screen justify-center items-center flex-col gap-10">
-      <div className='jutify-center items-center flex mb-20 font-extrabold text-white text-4xl'>TWITTER<span className='font-normal ml-2'>IVY</span></div>
+      <div className='jutify-center items-center flex mb-20 font-extrabold text-white text-4xl'>TWITTER<span className='font-normal ml-2 text-[#FFD700]'>Gold</span></div>
 
       <div className="flex bg-white rounded-2xl p-12 flex-col">
 
